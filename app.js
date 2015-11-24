@@ -44,10 +44,10 @@ io.on('connection', function(socket){
         var user = getClient(data.name);
         if(user){
             socket.broadcast.to(user.socketId).emit( 'call', {from: socket.id} );
-            console.log("Socket id: "+socket.id+" connecting in: "+socketId);
+            console.log("Socket id: "+socket.id+" connecting in: "+ user.socketId);
         }
         else{
-            socket.emit( 'call-response', {status: 3} );
+            socket.emit( 'call-response', { status : 3 } );
         }
 	});
 
@@ -74,7 +74,6 @@ io.on('connection', function(socket){
 	});
 
     socket.on('send-message', function (data) {
-        console.log(data);
         var to = data.to;
         data.from = socket.id;
         delete data.to;
@@ -108,12 +107,14 @@ function getClientsInRoom(room, name){
 }
 
 function getClient(name){
+    var client = undefined;
     clients.forEach(function(c, i){
-        if( name !== c.name ){
-            return c;
+        console.log(name + " - " + c.name + " - " + (name === c.name) + " - " + (name == c.name) );
+        if(name === c.name){
+            client = c;
         }
     });
-    return undefined;
+    return client;
 }
 
 setInterval(function() { 

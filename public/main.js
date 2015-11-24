@@ -124,9 +124,9 @@ socket.on('new-client', function (data) {
 });
 
 socket.on('call-response', function (data) {
-    var message = getMessage(data.result);
+    var message = getMessage(data.status);
     alert(message);
-    if(data.result == 1){
+    if(data.status == 1){
         start(data.from);
     }
 });
@@ -134,9 +134,9 @@ socket.on('call-response', function (data) {
 socket.on('call', function (data) {
     console.log(data);
     if(confirm("Um user pretende-lhe ligar.")){
-        socket.emit('call-response', { to : data.from, result : 1});
+        socket.emit('call-response', { to : data.from, status : 1});
     }else {
-        socket.emit('call-response', { to: data.from, result : 2});
+        socket.emit('call-response', { to: data.from, status : 2});
     }
 });
 
@@ -146,8 +146,8 @@ function appendItem( lista, room, name, id ) {
     lista.appendChild(item);
 }
 
-function getMesssage(result){
-    switch(result){
+function getMessage(status){
+    switch(status){
         case 1:
             return "Chamada aceite.";
         case 2:
