@@ -1,10 +1,24 @@
-var constraints = { video : true, audio : true };
+var audioconstraints = {
+    mandatory : {
+        googEchoCancellation : true,
+        googEchoCancellation2 : true,
+        googAutoGainControl : true,
+        googAutoGainControl2 : true
+    },
+    optional: []
+};
+var videoconstraints = {
+    mandatory : {},
+    optional: []
+};
+var mediaConstraints = { video : true, audio : true };
 
 var getUserMedia = ( navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia).bind(navigator);
 var PeerConnection = window.mozRTCPeerConnection || window.webkitRTCPeerConnection;
 var IceCandidate = window.mozRTCIceCandidate || window.RTCIceCandidate;
 var SessionDescription = window.mozRTCSessionDescription || window.RTCSessionDescription;
 var MediaStream = window.webkitMediaStream || window.mozMediaStream || window.MediaStream;
+
 var pc;
 var socket = io();
 var isInitiator;
@@ -44,7 +58,7 @@ function start( id ) {
         video.src = window.URL.createObjectURL(evt.stream);
     }
 
-    getUserMedia(constraints, successCallBack, errorCallBack);
+    getUserMedia(mediaConstraints, successCallBack, errorCallBack);
 }
 
 socket.on('message', function (data) {
