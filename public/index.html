@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>VIDEO CALL</title>
+    <script src="/socket.io/socket.io.js"></script>
+
+</head>
+<body>
+    <h1>Hello</h1>
+    
+    <video id="local-video" autoplay></video>
+    <video id="remote-video" autoplay></video>
+
+    <div>
+    	<input id="iUsername" type="text" name="" value="" placeholder="Username">
+        <input id="iRoom" type="text" name="" value="sala1" placeholder="Room">
+    	<button type="button" onclick="sendName()">Send Name</button>	
+    </div>
+    <p>Lista de CLientes</p>
+    <ul id="lista">
+    	
+    </ul>
+
+    <script src="main.js"></script>
+</body>
+</html>
